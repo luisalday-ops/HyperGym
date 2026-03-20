@@ -1,0 +1,57 @@
+body {
+	/* Creamos un degradado que no se degrada, sino que corta en seco */
+    background: linear-gradient(#282BE3 80px, #807A71 80px);
+    /* Para que el fondo cubra toda la pantalla y no se repita */
+	min-height: 100vh;
+
+}
+
+#margin {
+	margin-top: 0px;
+	margin-right: 200px;
+	margin-bottom: 50px;
+	margin-left: 200px;
+	border-style: double;
+}
+
+.navbar {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/*
+<input type="checkbox" id="pesas" name="servicio" value="pesas">	/*Seleccion de multiples respuestas
+<label for="pesas">
+	Área de pesas
+</label>
+<br>
+<input type="checkbox" id="cardio" name="servicio" value="cardio">
+<label for="cardio">Cardio</label>
+<br>
+<input type="checkbox" id="nutricion" name="servicio" value="nutricion">
+<label for="nutricion">Sugerencia alimentaria</label>
+<br><br>
+
+<label for="frecuencia"> /*Para que la opcion este en un cuadro de seleccion
+	¿Con qué frecuencia entrenas?
+</label>
+<select id="frecuencia" name="frecuencia">
+	<option value="1-2">
+    	1 a 2 días
+	</option>
+	<option value="3-4">
+    	3 a 4 días
+	</option>
+    <option value="5+">
+    	5 o más días
+    </option>
+</select>
+<br><br>
+*/
