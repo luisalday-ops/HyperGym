@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(180deg, #3b5bff, #d1d1d1);
+  min-height: 100vh;
+  color: #1f2933;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+
+  background: linear-gradient(to bottom, #3b5bff);
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 0 50px;
+  justify-content: space-between;
+  box-sizing: border-box;
+  color: white;
+    
+  z-index: 1000;
+}
+.navbar a{
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.logo { font-weight: bold; font-size: 24px; color: #000080; }
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 14px;
+}
+
+.profile-circle {
+    width: 40px;
+    height: 40px;
+    background-color: #d1d1d1;
+    border-radius: 50%;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: white;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.header p {
+  margin-top: 0.5rem;
+  opacity: 0.9;
+}
+
+/* Container */
+.container {
+  max-width: 00px;
+  margin: auto;
+  padding: 2rem 1rem 4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Cards */
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 15px 35px rgba(0,0,0,0.45);
+}
+
+.card h2 {
+  margin-bottom: 0.8rem;
+  color: #4338ca;
+  font-size: 1.3rem;
+}
+
+.food {
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
+}
+
+.benefit {
+  font-size: 0.85rem;
+  color: #6b7280;
+  border-left: 4px solid #6366f1;
+  padding-left: 0.6rem;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.85rem;
+  color: #374151;
+}

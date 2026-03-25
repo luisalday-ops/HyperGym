@@ -1,0 +1,81 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #d1d1d1; /* Color de fondo grisáceo de la imagen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.admin-container {
+    width: 90%;
+    max-width: 800px;
+    background-color: #e9e9e9;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+/* Barra superior con degradado azul */
+.header-bar {
+    background: linear-gradient(to bottom, #3b5bff, #333333);
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    text-shadow: 2px 2px 4px #000;
+}
+
+.user-avatar {
+    width: 35px;
+    height: 35px;
+    background-color: #ddd;
+    border-radius: 50%;
+}
+
+.content {
+    padding: 30px;
+    color: white;
+}
+
+.subtitle {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* Tarjeta de la gráfica similar a la imagen */
+.chart-card {
+    background-color: #0b111e;
+    padding: 20px;
+    border-radius: 4px;
+    border: 1px solid #333;
+}
+
+.chart-card h3 {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
+/* Caja de descripción inferior */
+.description-box {
+    margin-top: 40px;
+    background-color: #d1d1d1;
+    color: #333;
+    padding: 15px;
+    width: 70%;
+    font-size: 13px;
+}

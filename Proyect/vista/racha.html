@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi Racha</title>
+  <link rel="stylesheet" href="css/racha.css">
+</head>
+<body>
+
+  <div class="navbar">
+    <a href="hypergym.html" class="logo">HG</a>
+    <a href="#">Rachas</a>
+    <a href="dietas.html">Dietas</a>
+    <a href="rutina_de_ejercicio.html">Rutinas</a>
+    <a href="perfil.html" class="profile-link">
+    <div class="profile-circle"></div>
+    </a>
+  </div>
+
+  <div class="container">
+    <h1>MI RACHA</h1>
+
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <script>
+    const totalCirculos = 130; // ← cambia este número si quieres más o menos
+    const grid = document.getElementById("grid");
+
+    for (let i = 1; i <= totalCirculos; i++) {
+      const circle = document.createElement("div");
+      circle.classList.add("circle");
+
+      // Primeros 11 en morado
+      if (i <= 11) {
+        circle.classList.add("active");
+      }
+
+      circle.textContent = i;
+      grid.appendChild(circle);
+    }
+  </script>
+
+</body>
+</html>

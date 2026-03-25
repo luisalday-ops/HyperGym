@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title> Survey </title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body>
+        <div id="margin">
+            <h2>Survey for analysis of healthy habits</h2>
+            <p>
+                Application that implements Artificial Intelligence to help you lose weight and avoid injuries during periods of muscle exercise that could cause bone weakening; for this we provide support and contact information with specialists.
+            </p>
+
+            <h3>Instructions</h3>
+            <p>
+                Please select the option that best describes how you have felt over the past two weeks. All responses are confidential and will be used solely for research purposes related to the development of the app.
+            </p>
+            
+            <form action="/enviar-encuesta" method="POST">
+                
+                <label for="name">
+                    What is your name?
+                </label>
+                <br>
+                <input type="text" id="name" name="name" required>
+                <br><br>
+
+                <p>
+                    1. What is your gender?
+                </p>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">Male</label>
+                <br>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Female</label>
+                <br>
+                <input type="radio" id="prefer-not" name="gender" value="prefer-not-to-say">
+                <label for="prefer-not">I prefer not to say.</label>
+                <br>
+                <input type="radio" id="other" name="gender" value="other">
+                <label for="other">Other</label>
+                <br><br>
+
+                <p>
+                    2. What is your age?
+                </p>
+                <input type="radio" id="18-20" name="age" value="18-20">
+                <label for="18-20">18-20</label>
+                <br>
+                <input type="radio" id="21-23" name="age" value="21-23">
+                <label for="21-23">21-23</label>
+                <br>
+                <input type="radio" id="24-26" name="age" value="24-26">
+                <label for="24-26">24-26</label>
+                <br>
+                <input type="radio" id="26-28" name="age" value="26-28">
+                <label for="26-28">26-28</label>
+                <br>
+                <input type="radio" id="29-31" name="age" value="29-31">
+                <label for="29-31">29-31</label>
+                <br>
+                <input type="radio" id="other" name="age" value="31+">
+                <label for="31+">31+</label>
+                <br><br>
+
+                <h3>Nutrition and hydration</h3>
+                <p>
+                    3. Do you keep track of your calories?
+                </p>
+                <input type="radio" id="yes" name="calories" value="yes">
+                <label for="yes">Yes</label>
+                <br>
+                <input type="radio" id="no" name="calories" value="no">
+                <label for="no">No</label>
+                <br>
+                <input type="radio" id="almost-always" name="calories" value="almost-always">
+                <label for="almost-always">Almost always</label>
+                <br>
+                <input type="radio" id="sometimes" name="calories" value="sometimes">
+                <label for="sometimes">Sometimes</label>
+                <br><br>
+
+                <p>
+                    4. Do you consider your current diet to be balanced and healthy?
+                </p>
+                <input type="radio" id="yes" name="diet" value="yes">
+                <label for="yes">Yes</label>
+                <br>
+                <input type="radio" id="no" name="diet" value="no">
+                <label for="no">No</label>
+                <br>
+                <input type="radio" id="partially" name="diet" value="partially">
+                <label for="partially">Partially</label>
+                <br><br>
+
+                <p>
+                    5. When eating out, how often do you choose healthy or light options?
+                </p>
+                <input type="radio" id="Always" name="eating-out" value="Always">
+                <label for="Always">Always</label>
+                <br>
+                <input type="radio" id="almost-always" name="eating-out" value="almost-always">
+                <label for="almost-always">Almost always</label>
+                <br>
+                <input type="radio" id="sometimes" name="eating-out" value="sometimes">
+                <label for="sometimes">Sometimes</label>
+                <br>
+                <input type="radio" id="seldom" name="eating-out" value="seldom">
+                <label for="seldom">Seldom</label>
+                <br>
+                <input type="radio" id="never" name="eating-out" value="never">
+                <label for="never">Never</label>
+                <br><br>
+
+                <p>
+                    6. How well do you think you understand the basics of balanced nutrition?
+                </p>
+                <input type="radio" id="very-good" name="nutrition" value="very-good">
+                <label for="very-good">Very good</label>
+                <br>
+                <input type="radio" id="good" name="nutrition" value="good">
+                <label for="good">Good</label>
+                <br>
+                <input type="radio" id="regular" name="nutrition" value="regular">
+                <label for="regular">Regular</label>
+                <br>
+                <input type="radio" id="bad" name="nutrition" value="bad">
+                <label for="bad">Bad</label>
+                <br>
+                <input type="radio" id="very-badly" name="nutrition" value="very-badly">
+                <label for="very-badly">Very badly</label>
+                <br><br>
+
+                <p>
+                    7. On average, how many glasses of plain water do you drink per day?
+                </p>
+                <input type="radio" id="less-4" name="water" value="less-4">
+                <label for="less-4">Less than 4 glasses</label>
+                <br>
+                <input type="radio" id="4-6" name="water" value="4-6">
+                <label for="4-6">4 to 6 glasses</label>
+                <br>
+                <input type="radio" id="7-9" name="water" value="7-9">
+                <label for="7-9">7 to 9 glasses</label>
+                <br>
+                <input type="radio" id="more-10" name="water" value="more-10">
+                <label for="more-10">More than 10 glasses</label>
+                <br><br>
+
+                <p>
+                    8. On average, how many hours do you sleep daily?
+                </p>
+                <input type="radio" id="less-5" name="sleep" value="less-5">
+                <label for="less-5">Less than 5 hours</label>
+                <br>
+                <input type="radio" id="5-6" name="sleep" value="5-6">
+                <label for="5-6">5 to 6 hours</label>
+                <br>
+                <input type="radio" id="7-8" name="sleep" value="7-8">
+                <label for="7-8">7 to 8 hours</label>
+                <br>
+                <input type="radio" id="more-9" name="sleep" value="more-9">
+                <label for="more-9">More than 9 hours</label>
+                <br><br>
+
+                <h3>Physical activity</h3>
+                <p>
+                    9. How often do you do physical activity or exercise?
+                </p>
+                <input type="radio" id="never" name="physical-activity" value="never">
+                <label for="never">Never</label>
+                <br>
+                <input type="radio" id="1-2" name="physical-activity" value="1-2">
+                <label for="1-2">1 to 2 times per week</label>
+                <br>
+                <input type="radio" id="3-4" name="physical-activity" value="3-4">
+                <label for="3-4">3 to 4 times per week</label>
+                <br>
+                <input type="radio" id="more-5" name="physical-activity" value="more-5">
+                <label for="more-5">More than 5 times per week</label>
+                <br><br>
+
+                <p>
+                    10. How much time do you spend exercising daily?
+                </p>
+                <input type="radio" id="never" name="exercise-time" value="never">
+                <label for="never">Never</label>
+                <br>
+                <input type="radio" id="1-2" name="exercise-time" value="1-2">
+                <label for="1-2">1 to 2 hours per day</label>
+                <br>
+                <input type="radio" id="3-4" name="exercise-time" value="3-4">
+                <label for="3-4">3 to 4 hours per day</label>
+                <br>
+                <input type="radio" id="more-5" name="exercise-time" value="more-5">
+                <label for="more-5">More than 5 hours per day</label>
+                <br><br>
+
+                <p>
+                    11. Are you trying to maintain a healthy level in terms of your physique?
+                </p>
+                <input type="radio" id="never" name="physique" value="never">
+                <label for="never">Never</label>
+                <br>
+                <input type="radio" id="rarely" name="physique" value="rarely">
+                <label for="rarely">Rarely</label>
+                <br>
+                <input type="radio" id="sometimes" name="physique" value="sometimes">
+                <label for="sometimes">Sometimes</label>
+                <br>
+                <input type="radio" id="often" name="physique" value="often">
+                <label for="often">Often</label>
+                <br>
+                <input type="radio" id="Always" name="physique" value="always">
+                <label for="Always">Always</label>
+                <br><br>
+
+                <p>
+                    12. What type of physical activity do you do most often?
+                </p>
+                <input type="radio" id="gym/weights" name="activity" value="gym/weights">
+                <label for="gym/weights">Gym/weights</label>
+                <br>
+                <input type="radio" id="running" name="activity" value="running">
+                <label for="running">Running or jogging</label>
+                <br>
+                <input type="radio" id="team" name="activity" value="team">
+                <label for="team">Team sports</label>
+                <br>
+                <input type="radio" id="outdoor" name="activity" value="outdoor">
+                <label for="outdoor">Outdoor activities</label>
+                <br>
+                <input type="radio" id="home" name="activity" value="home">
+                <label for="home">Home activities</label>
+                <br>
+                <input type="radio" id="other" name="activity" value="other">
+                <label for="other">Other</label>
+                <br><br>
+
+                <p>
+                    13. How much time do you dedicate to exercise in an average session?
+                </p>
+                <input type="radio" id="none" name="exercise" value="none">
+                <label for="none">None</label>
+                <br>
+                <input type="radio" id="less-30" name="exercise" value="less-30">
+                <label for="less-30">Less than 30 minutes</label>
+                <br>
+                <input type="radio" id="30-60" name="exercise" value="30-60">
+                <label for="30-60">30 to 60 minutes</label>
+                <br>
+                <input type="radio" id="1-2" name="exercise" value="1-2">
+                <label for="1-2">1 to 2 hours</label>
+                <br>
+                <input type="radio" id="more-2" name="exercise" value="more-2">
+                <label for="more-2">More than 2 hours</label>
+                <br><br>
+
+                <p>
+                    14. Have you received guidance or advice from a trainer, nutritionist, or specialist?
+                </p>
+                <input type="radio" id="yes-currently" name="guidance" value="yes-currently">
+                <label for="yes-currently">Yes, currently</label>
+                <br>
+                <input type="radio" id="yes-previously" name="guidance" value="yes-previously">
+                <label for="yes-previously">Yes, previously</label>
+                <br>
+                <input type="radio" id="no" name="guidance" value="no">
+                <label for="no">No</label>
+                <br><br>
+
+                <h3>Personal motivation and perception</h3>
+                <p>
+                    15. What primarily motivates you to exercise?
+                </p>
+                <input type="radio" id="health" name="motivation" value="health">
+                <label for="health">Improving my health</label>
+                <br>
+                <input type="radio" id="weight-loss" name="motivation" value="weight-loss">
+                <label for="weight-loss">Losing weight</label>
+                <br>
+                <input type="radio" id="fitness" name="motivation" value="fitness">
+                <label for="fitness">Improving my fitness level</label>
+                <br>
+                <input type="radio" id="social" name="motivation" value="social">
+                <label for="social">Social reasons</label>
+                <br>
+                <input type="radio" id="no" name="motivation" value="no">
+                <label for="no">No</label>
+                <br>
+                <input type="radio" id="other" name="motivation" value="other">
+                <label for="other">Other</label>
+                <br><br>
+
+                <p>
+                    16. How important do you consider it to maintain a healthy lifestyle? Very important
+                </p>
+                <input type="radio" id="important" name="importance" value="important">
+                <label for="important">Important</label>
+                <br>
+                <input type="radio" id="neutral" name="importance" value="neutral">
+                <label for="neutral">Neutral</label>
+                <br>    
+                <input type="radio" id="somewhat-important" name="importance" value="somewhat-important">
+                <label for="somewhat-important">Somewhat important</label>
+                <br>
+                <input type="radio" id="not-important" name="importance" value="not-important">
+                <label for="not-important">Not important at all</label>
+                <br><br>
+
+                <h3>Barriers and general health</h3>
+                <p>
+                    17. What are the main obstacles to maintaining an exercise routine?
+                </p>
+                <input type="radio" id="lack-of-time" name="obstacles" value="lack-of-time">
+                <label for="lack-of-time">Lack of time</label>
+                <br>
+                <input type="radio" id="lack-of-motivation" name="obstacles" value="lack-of-motivation">
+                <label for="lack-of-motivation">Lack of motivation</label>
+                <br>
+                <input type="radio" id="lack-of-resources" name="obstacles" value="lack-of-resources">
+                <label for="lack-of-resources">Lack of resources (e.g., gym access)</label>
+                <br>
+                <input type="radio" id="physical-limitations" name="obstacles" value="physical-limitations">
+                <label for="physical-limitations">Physical limitations</label>
+                <br>
+                <input type="radio" id="gym-cost" name="obstacles" value="gym-cost">
+                <label for="gym-cost">Gym membership cost</label>
+                <br>
+                <input type="radio" id="other" name="obstacles" value="other">
+                <label for="other">Other</label>
+                <br><br>
+
+                <p>
+                    18. How often do you get medical checkups?
+                </p>
+                <input type="radio" id="once-year" name="checkups" value="once-year">
+                <label for="once-year">Once a year</label>
+                <br>
+                <input type="radio" id="every-six-months" name="checkups" value="every-six-months">
+                <label for="every-six-months">Every six months</label>
+                <br>
+                <input type="radio" id="every-three-months" name="checkups" value="every-three-months">
+                <label for="every-three-months">Every three months</label>
+                <br>
+                <input type="radio" id="every-month" name="checkups" value="every-month">
+                <label for="every-month">Every month</label>
+                <br>
+                <input type="radio" id="only-when-i-feel-bad" name="checkups" value="only-when-i-feel-bad">
+                <label for="only-when-i-feel-bad">Only when I feel bad</label>
+                <br>
+                <input type="radio" id="never" name="checkups" value="never">
+                <label for="never">Never</label>
+                <br><br>
+
+                <p>
+                    19. What role do you think nutrition plays in achieving good physical fitness?
+                </p>
+                <input type="radio" id="very-important" name="nutrition" value="very-important">
+                <label for="very-important">Very important</label>
+                <br>
+                <input type="radio" id="important" name="nutrition" value="important">
+                <label for="important">Important</label>
+                <br>
+                <input type="radio" id="neutral" name="nutrition" value="neutral">
+                <label for="neutral">Neutral</label>
+                <br>
+                <input type="radio" id="not-important" name="nutrition" value="not-important">
+                <label for="not-important">Not important</label>
+                <br>
+                <input type="radio" id="nothing-important" name="nutrition" value="nothing-important">
+                <label for="nothing-important">Nothing important</label>
+                <br><br>
+
+                <label for="comentarios">
+                    Sugerencias adicionales:
+                </label><br>
+                <textarea id="comentarios" name="comentarios" rows="4" cols="50"></textarea>
+                <br><br>
+
+                <button type="submit">
+                    Enviar Encuesta
+                </button>
+            </form>
+        </div>
+    </body>
+</html>
