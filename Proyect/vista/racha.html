@@ -1,45 +1,119 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Mi Racha</title>
-  <link rel="stylesheet" href="css/racha.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Racha - Streak Tracker</title>
+    <link rel="stylesheet" href="../css/racha.css">
 </head>
 <body>
+    <div class="navbar">
+        <div>
+          <a href="../index.html" class="logo">HG</a>
+        </div>
+        <nav>
+            <a href="dietas.html">Dietas</a>
+            <a href="rutina_de_ejercicio.html">Rutinas</a>
+            <a href="login.html">Login</a>
+        </nav>
+        <a href="perfil.html" class="profile-link">
+          <div class="profile-circle"></div>
+        </a>
+    </div>
 
-  <div class="navbar">
-    <a href="hypergym.html" class="logo">HG</a>
-    <a href="#">Rachas</a>
-    <a href="dietas.html">Dietas</a>
-    <a href="rutina_de_ejercicio.html">Rutinas</a>
-    <a href="perfil.html" class="profile-link">
-    <div class="profile-circle"></div>
-    </a>
-  </div>
+    <div class="container">
+        <h1>🔥 TU RACHA ACTUAL</h1>
+        <div class="streak-number" id="streakNumber">0</div>
+        <div class="streak-label">días consecutivos</div>
+        <div id="message" class="message"></div>
+        <button onclick="marcarAsistencia()">✅ Marcar asistencia hoy</button>
+    </div>
 
-  <div class="container">
-    <h1>MI RACHA</h1>
-
-    <div class="grid" id="grid"></div>
-  </div>
-
-  <script>
-    const totalCirculos = 130; // ← cambia este número si quieres más o menos
-    const grid = document.getElementById("grid");
-
-    for (let i = 1; i <= totalCirculos; i++) {
-      const circle = document.createElement("div");
-      circle.classList.add("circle");
-
-      // Primeros 11 en morado
-      if (i <= 11) {
-        circle.classList.add("active");
-      }
-
-      circle.textContent = i;
-      grid.appendChild(circle);
-    }
-  </script>
-
+    <script>
+        async function marcarAsistencia() {
+            try {
+                const response = await fetch('streak.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                const data = await response.json();
+                
+                // Actualizar el número mostrado
+                document.getElementById('streakNumber').textContent = data.streak;
+                
+                // Mostrar mensaje según el resultado
+                const messageDiv = document.getElementById('message');
+                messageDiv.className = 'message';
+                
+                if (data.status === 'success') {
+                    if (data.message === '¡Racha mantenida!') {
+                        messageDiv.classList.add('success');
+                        messageDiv.textContent = '✅ ¡Excelente! Racha mantenida en ' + data.streak + ' días';
+                    } else if (data.message === '¡Nuevo día registrado!') {
+                        messageDiv.classList.add('success');
+                        messageDiv.textContent = '🎉 ¡Felicidades! Has alcanzado ' + data.streak + ' días consecutivos';
+                    } else {
+                        messageDiv.classList.add('success');
+                        messageDiv.textContent = data.message;
+                    }
+                } else if (data.status === 'warning') {
+                    messageDiv.classList.add('warning');
+                    messageDiv.textContent = '⚠️ ' + data.message + ' Racha actual: ' + data.streak + ' días';
+                } else {
+                    messageDiv.classList.add('error');
+                    messageDiv.textContent = '❌ ' + data.message;
+                }
+                
+                // Ocultar mensaje después de 3 segundos
+                setTimeout(() => {
+                    messageDiv.className = 'message';
+                    messageDiv.textContent = '';
+                }, 3000);
+                
+            } catch (error) {
+                console.error('Error:', error);
+                const messageDiv = document.getElementById('message');
+                messageDiv.className = 'message error';
+                messageDiv.textContent = '❌ Error de conexión con el servidor';
+                setTimeout(() => {
+                    messageDiv.className = 'message';
+                    messageDiv.textContent = '';
+                }, 3000);
+            }
+        }
+        
+        // Cargar la racha actual al iniciar la página
+        async function cargarRacha() {
+            try {
+                const response = await fetch('streak.php?action=get');
+                const data = await response.json();
+                document.getElementById('streakNumber').textContent = data.streak || 0;
+                
+                if (data.last_check) {
+                    const lastDate = new Date(data.last_check);
+                    const today = new Date();
+                    const diffDays = Math.floor((today - lastDate) / (1000 * 60 * 60 * 24));
+                    
+                    if (diffDays > 3) {
+                        const messageDiv = document.getElementById('message');
+                        messageDiv.className = 'message warning';
+                        messageDiv.textContent = '⚠️ Llevas ' + diffDays + ' días sin marcar asistencia. Si pasas de 3 días, perderás tu racha.';
+                        setTimeout(() => {
+                            messageDiv.className = 'message';
+                            messageDiv.textContent = '';
+                        }, 5000);
+                    }
+                }
+            } catch (error) {
+                console.error('Error al cargar racha:', error);
+            }
+        }
+        
+        // Cargar racha al inicio
+        cargarRacha();
+    </script>
 </body>
 </html>

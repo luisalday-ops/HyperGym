@@ -18,8 +18,7 @@ body {
   left: 0;
   width: 100%;
   height: 60px;
-
-  background: linear-gradient(to bottom, #3b5bff);
+  background: #3b5bff;
   display: flex;
   align-items: center;
   gap: 40px;
@@ -27,59 +26,91 @@ body {
   justify-content: space-between;
   box-sizing: border-box;
   color: white;
-    
   z-index: 1000;
 }
 
-.navbar a{
+.navbar a {
   text-decoration: none;
   color: #ffffff;
 }
 
-.logo { font-weight: bold; font-size: 24px; color: #3b5bff; }
+.logo {
+  font-weight: bold;
+  font-size: 24px;
+  color: white;
+}
 
 nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 14px;
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 14px;
 }
 
 .profile-circle {
-    width: 40px;
-    height: 40px;
-    background-color: #d1d1d1;
-    border-radius: 50%;
-}
-
-h1 {
-  text-align: center;
-  color: white;
-  margin-bottom: 25px;
-  letter-spacing: 2px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(13, 60px);
-  gap: 14px;
-  justify-content: center;
-}
-
-.circle {
-  width: 60px;
-  height: 60px;
-  background: #ffffff;
+  width: 40px;
+  height: 40px;
+  background-color: #d1d1d1;
   border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 26px;
-  font-weight: bold;
-  color: black;
 }
 
-.circle.active {
-  background: #c02bcf;
+.container {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.streak-number {
+  font-size: 120px;
+  font-weight: bold;
   color: white;
+  margin: 20px 0;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+}
+
+.streak-label {
+  color: white;
+  font-size: 24px;
+  margin-top: -20px;
+}
+
+.message {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.message.success {
+  background: rgba(76, 175, 80, 0.3);
+  color: #4caf50;
+}
+
+.message.error {
+  background: rgba(244, 67, 54, 0.3);
+  color: #f44336;
+}
+
+.message.warning {
+  background: rgba(255, 193, 7, 0.3);
+  color: #ffc107;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 30px;
+  font-size: 18px;
+  background: white;
+  color: #3b5bff;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
 }

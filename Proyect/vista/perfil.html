@@ -1,60 +1,341 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Perfil de usuario</title>
-  <link rel="stylesheet" href="css/perfil.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - StreakTracker</title>
+    <link rel="stylesheet" href="../css/perfil.css">
 </head>
 <body>
-
-    <header class="navbar">
-        <a href="hypergym.html" class="logo">HG</a>
-            <a href="#">Perfil</a>
+    <div class="navbar">
+        <div class="logo">
+          <a href="../index.html">HG</a>
+        </div>
+        <nav>
             <a href="racha.html">Rachas</a>
             <a href="dietas.html">Dietas</a>
             <a href="rutina_de_ejercicio.html">Rutinas</a>
-         <a href="perfil.html" class="profile-link">
-        <div class="profile-circle"></div>
+            <a href="login.html">Login</a>
+        </nav>
+        <a href="perfil.html" class="profile-link">
+          <div class="profile-circle"></div>
         </a>
-    </header>
+    </div>
 
+    <div class="profile-container" id="mainContent">
+        <!-- El contenido se carga dinámicamente -->
+    </div>
 
-  <div class="profile-container">
-
-    <header class="profile-header">
-      <div class="user-info">
-        <div class="avatar"></div>
-        <div class="user-text">
-          <h2>Nombre del usuario</h2>
+    <!-- Modal para editar perfil -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <h3>✏️ Editar Perfil</h3>
+            <input type="text" id="editNombre" placeholder="Nombre completo">
+            <input type="email" id="editEmail" placeholder="Correo electrónico">
+            <textarea id="editBio" placeholder="Biografía"></textarea>
+            <div class="modal-buttons">
+                <button class="cancel-btn" onclick="cerrarModal()">Cancelar</button>
+                <button class="save-btn" onclick="guardarPerfil()">Guardar</button>
+            </div>
         </div>
-      </div>
+    </div>
 
-      <button class="edit-btn">Editar perfil</button>
-    </header>
+    <!-- Input oculto para cargar foto -->
+    <input type="file" id="fotoInput" accept="image/*" style="display: none" onchange="cambiarFoto(event)">
 
-    <section class="section">
-      <h3>Pendientes</h3>
-      <div class="card-row">
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-      </div>
-    </section>
+    <script>
+        // Datos del perfil (se guardan en localStorage)
+        let perfilData = {
+            nombre: "Usuario Ejemplo",
+            email: "usuario@ejemplo.com",
+            bio: "¡Apasionado por mantener mi racha! 🔥 Cada día cuenta. 📅",
+            foto: null,
+            fechaRegistro: new Date().toISOString(),
+            rachaActual: 0,
+            rachaMaxima: 0,
+            totalDias: 0,
+            ultimaMarca: null
+        };
 
-    <section class="section">
-      <h3>Actividad reciente</h3>
-      <div class="card-row">
-        <div class="card"></div>
-        <div class="card"></div>
-      </div>
-    </section>
+        // Cargar datos guardados
+        function cargarDatos() {
+            const guardado = localStorage.getItem('perfilUsuario');
+            if (guardado) {
+                const datos = JSON.parse(guardado);
+                perfilData = {...perfilData, ...datos};
+            }
+            
+            // Actualizar foto en el navbar
+            if (perfilData.foto) {
+                document.getElementById('navProfileCircle').style.backgroundImage = `url(${perfilData.foto})`;
+                document.getElementById('navProfileCircle').style.backgroundSize = 'cover';
+            }
+            
+            mostrarPerfil();
+        }
 
-    <footer>
-      <button class="share-btn">Compartir perfil</button>
-    </footer>
+        // Mostrar página de perfil
+        function mostrarPerfil() {
+            const container = document.getElementById('mainContent');
+            const fotoSrc = perfilData.foto || 'https://via.placeholder.com/120';
+            
+            container.innerHTML = `
+                <div class="profile-header">
+                    <div class="user-info">
+                        <div class="profile-photo-container" onclick="document.getElementById('fotoInput').click()">
+                            <img src="${fotoSrc}" alt="Foto de perfil" class="profile-photo" id="profilePhoto">
+                            <div class="photo-overlay">📷 Cambiar foto</div>
+                        </div>
+                        <div class="user-text">
+                            <h2 id="displayNombre">${escapeHtml(perfilData.nombre)}</h2>
+                            <p id="displayEmail">${escapeHtml(perfilData.email)}</p>
+                            <p class="bio-text" id="displayBio">${escapeHtml(perfilData.bio)}</p>
+                            <p>📅 Miembro desde: ${new Date(perfilData.fechaRegistro).toLocaleDateString()}</p>
+                        </div>
+                    </div>
+                    <button class="edit-btn" onclick="abrirModalEdicion()">✏️ Editar perfil</button>
+                </div>
 
-  </div>
+                <div class="section">
+                    <h3>📊 Mis Estadísticas</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <span class="stat-number" id="statRachaActual">${perfilData.rachaActual}</span>
+                            <span class="stat-label">Racha actual 🔥</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="statRachaMaxima">${perfilData.rachaMaxima}</span>
+                            <span class="stat-label">Racha máxima 🏆</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="statTotalDias">${perfilData.totalDias}</span>
+                            <span class="stat-label">Total días 📅</span>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="section">
+                    <h3>🎯 Mis Logros</h3>
+                    <div class="card-row" id="logrosContainer">
+                        ${generarLogros()}
+                    </div>
+                </div>
+
+                <footer>
+                    <button class="share-btn" onclick="compartirPerfil()">📤 Compartir perfil</button>
+                </footer>
+            `;
+        }
+
+        // Escapar HTML para evitar XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Generar logros según estadísticas
+        function generarLogros() {
+            const rachaMax = perfilData.rachaMaxima;
+            const totalDias = perfilData.totalDias;
+            let logros = '';
+            
+            if (rachaMax >= 1) logros += '<div class="card">🌟 Primer día<br><small>¡Empezaste tu viaje!</small></div>';
+            if (rachaMax >= 7) logros += '<div class="card">🏆 7 días 🔥<br><small>Racha de una semana</small></div>';
+            if (rachaMax >= 30) logros += '<div class="card">⭐ 30 días 🌟<br><small>Racha de un mes</small></div>';
+            if (rachaMax >= 100) logros += '<div class="card">💎 100 días 👑<br><small>Racha legendaria</small></div>';
+            if (totalDias >= 50) logros += '<div class="card">🎯 50 días totales<br><small>Dedicación</small></div>';
+            if (totalDias >= 100) logros += '<div class="card">🏅 100 días totales<br><small>Experto</small></div>';
+            
+            if (logros === '') {
+                logros = '<div class="card">🌟 ¡Completa tu primer día para obtener logros!</div>';
+            }
+            
+            return logros;
+        }
+
+        // Mostrar página de racha
+        function mostrarRacha() {
+            const container = document.getElementById('mainContent');
+            container.innerHTML = `
+                <div class="streak-container">
+                    <div class="streak-number" id="streakNumber">${perfilData.rachaActual}</div>
+                    <div class="streak-label">días consecutivos</div>
+                    <button class="streak-btn" onclick="marcarAsistencia()">✅ Marcar asistencia hoy</button>
+                    <div id="message" class="message"></div>
+                </div>
+            `;
+        }
+
+        // Marcar asistencia
+        function marcarAsistencia() {
+            const hoy = new Date();
+            const hoyString = hoy.toDateString();
+            const hoyISO = hoy.toISOString();
+            
+            // Verificar si ya marcó hoy
+            if (perfilData.ultimaMarca === hoyString) {
+                mostrarMensaje('⚠️ Ya marcaste asistencia hoy', 'warning');
+                return;
+            }
+            
+            let rachaActual = perfilData.rachaActual || 0;
+            let mensaje = '';
+            
+            // Si es el primer registro
+            if (!perfilData.ultimaMarca) {
+                rachaActual = 1;
+                mensaje = '🎉 ¡Primer día registrado! Comienza tu racha';
+            } else {
+                const ultimaFecha = new Date(perfilData.ultimaMarcaReal || perfilData.ultimaMarca);
+                const diffDias = Math.floor((hoy - ultimaFecha) / (1000 * 60 * 60 * 24));
+                
+                if (diffDias === 1) {
+                    rachaActual++;
+                    mensaje = `✅ ¡Excelente! Racha aumentada a ${rachaActual} días`;
+                } else if (diffDias <= 3) {
+                    mensaje = `🔄 Racha mantenida después de ${diffDias} días. Sigue así: ${rachaActual} días`;
+                } else {
+                    rachaActual = 1;
+                    mensaje = `⚠️ Perdiste tu racha de ${perfilData.rachaActual} días por inactividad. ¡Comienza una nueva!`;
+                }
+            }
+            
+            // Actualizar datos
+            perfilData.rachaActual = rachaActual;
+            perfilData.totalDias = (perfilData.totalDias || 0) + 1;
+            perfilData.ultimaMarca = hoyString;
+            perfilData.ultimaMarcaReal = hoyISO;
+            
+            // Actualizar racha máxima
+            if (rachaActual > (perfilData.rachaMaxima || 0)) {
+                perfilData.rachaMaxima = rachaActual;
+                mensaje += ' 🎉 ¡NUEVO RÉCORD!';
+            }
+            
+            // Guardar en localStorage
+            guardarEnLocalStorage();
+            
+            // Mostrar mensaje
+            mostrarMensaje(mensaje, rachaActual > 0 ? 'success' : 'info');
+            
+            // Actualizar número en pantalla
+            const streakNumber = document.getElementById('streakNumber');
+            if (streakNumber) {
+                streakNumber.textContent = perfilData.rachaActual;
+            }
+        }
+
+        function mostrarMensaje(texto, tipo) {
+            const msgDiv = document.getElementById('message');
+            if (msgDiv) {
+                msgDiv.textContent = texto;
+                msgDiv.className = `message ${tipo}`;
+                setTimeout(() => { 
+                    if(msgDiv) msgDiv.innerHTML = ''; 
+                }, 4000);
+            }
+        }
+
+        function actualizarEstadisticas() {
+            const rachaActualSpan = document.getElementById('statRachaActual');
+            const rachaMaximaSpan = document.getElementById('statRachaMaxima');
+            const totalDiasSpan = document.getElementById('statTotalDias');
+            
+            if (rachaActualSpan) rachaActualSpan.textContent = perfilData.rachaActual;
+            if (rachaMaximaSpan) rachaMaximaSpan.textContent = perfilData.rachaMaxima;
+            if (totalDiasSpan) totalDiasSpan.textContent = perfilData.totalDias;
+            
+            // Actualizar logros
+            const logrosContainer = document.getElementById('logrosContainer');
+            if (logrosContainer) {
+                logrosContainer.innerHTML = generarLogros();
+            }
+        }
+
+        function mostrarEstadisticas() {
+            mostrarPerfil();
+        }
+
+        function abrirModalEdicion() {
+            document.getElementById('editNombre').value = perfilData.nombre;
+            document.getElementById('editEmail').value = perfilData.email;
+            document.getElementById('editBio').value = perfilData.bio;
+            document.getElementById('editModal').style.display = 'flex';
+        }
+
+        function cerrarModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+
+        function guardarPerfil() {
+            perfilData.nombre = document.getElementById('editNombre').value;
+            perfilData.email = document.getElementById('editEmail').value;
+            perfilData.bio = document.getElementById('editBio').value;
+            
+            guardarEnLocalStorage();
+            cerrarModal();
+            mostrarPerfil();
+        }
+
+        function cambiarFoto(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    perfilData.foto = e.target.result;
+                    guardarEnLocalStorage();
+                    
+                    // Actualizar foto en el perfil
+                    const fotoImg = document.getElementById('profilePhoto');
+                    if (fotoImg) fotoImg.src = e.target.result;
+                    
+                    // Actualizar foto en el navbar
+                    document.getElementById('navProfileCircle').style.backgroundImage = `url(${e.target.result})`;
+                    document.getElementById('navProfileCircle').style.backgroundSize = 'cover';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function compartirPerfil() {
+            const texto = `¡Mira mi perfil en StreakTracker!\n\n${perfilData.nombre}\n📧 ${perfilData.email}\n📝 ${perfilData.bio}\n\n📊 Estadísticas:\n🔥 Racha actual: ${perfilData.rachaActual} días\n🏆 Racha máxima: ${perfilData.rachaMaxima} días\n📅 Total días: ${perfilData.totalDias}`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Mi perfil - StreakTracker',
+                    text: texto
+                }).catch(() => {
+                    copiarAlPortapapeles(texto);
+                });
+            } else {
+                copiarAlPortapapeles(texto);
+            }
+        }
+        
+        function copiarAlPortapapeles(texto) {
+            navigator.clipboard.writeText(texto).then(() => {
+                alert('✅ Perfil copiado al portapapeles');
+            }).catch(() => {
+                alert('✅ Perfil listo para compartir');
+            });
+        }
+
+        function guardarEnLocalStorage() {
+            localStorage.setItem('perfilUsuario', JSON.stringify(perfilData));
+        }
+
+        // Inicializar
+        cargarDatos();
+        
+        // Cerrar modal al hacer clic fuera
+        window.onclick = function(event) {
+            const modal = document.getElementById('editModal');
+            if (event.target === modal) {
+                cerrarModal();
+            }
+        }
+    </script>
 </body>
 </html>

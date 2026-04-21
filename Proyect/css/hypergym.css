@@ -1,24 +1,16 @@
-/* Configuración General */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #d1d1d1);
+    background: linear-gradient(to bottom, #f0f0f0, #d1d1d1); /* Corregido */
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.navbar a{
-  text-decoration: none;
-  color: #ffffff;
-
-}
-
-/* Navbar Azul Degradado */
 .navbar {
     width: 100%;
     height: 80px;
-    background: linear-gradient(to bottom, #3b5bff);
+    background: linear-gradient(to bottom, #3b5bff, #2a44cc); /* Añadido segundo color */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -27,65 +19,20 @@ body {
     color: white;
 }
 
-.logo {
-    font-weight: bold; 
-    font-size: 24px; 
-}
-
-.nav a {
-    color: white;
+.navbar a {
     text-decoration: none;
+    color: #ffffff;
     margin: 0 15px;
     font-size: 14px;
 }
 
-.profile-circle {
-    width: 40px;
-    height: 40px;
-    background-color: #d1d1d1;
-    border-radius: 50%;
-}
-
-/* Contenedor Principal */
-.container {
-    width: 100%;
-    max-width: none;
-    margin-top: 20px;
-}
-
-.top-bar {
-    width: 100%;
-    height: 30px;
-    background-color: #e9e9e9;
-    margin-bottom: 30px;
-}
-
-
-/* Contenedor centrado */
-.container {
-    margin: 0 auto;       
-}
-
-/* Imagen + texto en fila */
-.content {
-    display: flex;
-    align-items: center;
-    padding:0 190px;
-}
-
-/* Filas de Contenido */
 .row {
     display: flex;
-    width:100%;  
-    height: 100%;
+    width: 100%;
     margin-bottom: 50px;
     align-items: center;
-    padding:60 0px;
+    padding: 60px 0; /* Corregido: añadido px */
     background-color: #e9e9e9;
-}
-
-.textContent {
-    padding:0 190px;
 }
 
 .row.reverse {
@@ -93,46 +40,13 @@ body {
     background-color: #d1d1d1;
 }
 
-
-.image{
-    height: 100%;
-    height: 100%;
-    padding:0 190px;
-}
-
-.image-placeholder {
-    flex: 1;
-    height: 250px;
-}
-
-.text-placeholder {
-    flex: 1;
-    padding:0 190px;
-}
-
-/* Mapa */
-.map-section {
-    width: 100%;
-    margin-bottom: 50px;
-}
-
-.map-container img {
-    width: 50%;
-    height: auto;
-    align-items: center;
-    border: 5px solid#e9e9e9;
-    padding:0 470px;
-    background-color: #e9e9e9;
-}
-
-/* Footer */
 .big-footer {
     width: 100%;
     background-color: #03081f;
     color: white;
     text-align: center;
-    padding: 100px 0;
+    padding: 80px 0;
     font-size: 15px;
     font-weight: bold;
-    letter-spacing: 10px;
+    letter-spacing: 5px; /* Reducido para mejor legibilidad */
 }

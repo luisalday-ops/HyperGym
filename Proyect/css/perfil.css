@@ -20,6 +20,7 @@ body {
     justify-content: space-between;
     padding: 0 50px;
     color: white;
+    background: rgba(0,0,0,0.1);
 }
 
 .navbar a{
@@ -38,6 +39,12 @@ nav a {
     text-decoration: none;
     margin: 0 15px;
     font-size: 14px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+nav a:hover {
+    opacity: 0.8;
 }
 
 .profile-circle {
@@ -45,10 +52,15 @@ nav a {
     height: 40px;
     background-color: #d1d1d1;
     border-radius: 50%;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
 }
 
 /* CONTENEDOR */
 .profile-container {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 40px 50px;
 }
 
@@ -56,51 +68,169 @@ nav a {
 .profile-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  background: rgba(255,255,255,0.1);
+  padding: 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
 }
 
 .user-info {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.profile-photo-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.profile-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid white;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.photo-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.7);
+  border-radius: 50%;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.profile-photo-container:hover .photo-overlay {
+  height: 120px;
+  border-radius: 50%;
 }
 
 .user-text h2 {
   margin-bottom: 6px;
+  font-size: 28px;
+  color: white;
+}
+
+.user-text p {
+  color: rgba(255,255,255,0.9);
+  font-size: 14px;
+}
+
+.bio-text {
+  margin-top: 10px;
+  color: rgba(255,255,255,0.9);
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 400px;
 }
 
 /* BOTONES */
 .edit-btn {
-  padding: 8px 14px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  background: #eaeaea;
+  background: white;
+  color: #3b5bff;
+  font-weight: bold;
+  transition: all 0.3s;
 }
 
 .edit-btn:hover {
-  background: #ddd;
+  background: #eaeaea;
+  transform: scale(1.05);
 }
 
 /* SECCIONES */
 .section {
   margin-top: 40px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
 }
 
 .section h3 {
-  margin-bottom: 12px;
+  margin-bottom: 15px;
+  color: white;
+  font-size: 20px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.2);
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+  transition: transform 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-number {
+  font-size: 32px;
+  font-weight: bold;
+  display: block;
+}
+
+.stat-label {
+  font-size: 12px;
+  opacity: 0.9;
+  margin-top: 5px;
 }
 
 .card-row {
   display: flex;
   gap: 15px;
+  flex-wrap: wrap;
 }
 
 .card {
-  width: 160px;
-  height: 90px;
-  background: #e5e5e5;
-  border-radius: 8px;
+  flex: 1;
+  min-width: 150px;
+  height: 100px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  padding: 15px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  background: rgba(255,255,255,0.3);
 }
 
 /* FOOTER */
@@ -111,14 +241,160 @@ footer {
 }
 
 .share-btn {
-  background: #2563eb;
-  color: white;
+  background: white;
+  color: #3b5bff;
   border: none;
-  padding: 10px 18px;
+  padding: 12px 24px;
   border-radius: 8px;
   cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
 }
 
 .share-btn:hover {
-  background: #1e40af;
+  background: #eaeaea;
+  transform: scale(1.05);
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+}
+
+.modal-content h3 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.modal-content textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.modal-buttons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.save-btn {
+  background: #3b5bff;
+  color: white;
+}
+
+.cancel-btn {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #999;
+}
+
+/* Página de racha */
+.streak-container {
+  text-align: center;
+  background: rgba(255,255,255,0.1);
+  padding: 50px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.streak-number {
+  font-size: 120px;
+  font-weight: bold;
+  color: white;
+  margin: 20px 0;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+}
+
+.streak-label {
+  color: white;
+  font-size: 24px;
+  margin-top: -20px;
+}
+
+.streak-btn {
+  margin-top: 30px;
+  padding: 12px 30px;
+  font-size: 18px;
+  background: white;
+  color: #3b5bff;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+.streak-btn:hover {
+  transform: scale(1.05);
+}
+
+.message {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.message.success {
+  background: rgba(76, 175, 80, 0.3);
+  color: #4caf50;
+}
+
+.message.error {
+  background: rgba(244, 67, 54, 0.3);
+  color: #f44336;
+}
+
+.message.warning {
+  background: rgba(255, 193, 7, 0.3);
+  color: #ffc107;
+}
+
+.message.info {
+  background: rgba(33, 150, 243, 0.3);
+  color: #2196f3;
 }
